@@ -138,7 +138,7 @@ bindkey -e' > ~/.zshrc
     then
         printf "${RED}curl not installed. Skip${NC}\n"
     else
-        rm -rf ~/.oh-my-zsh
+        rm -rf ~/.oh-my-zsh 2> /dev/null
 	    sh -c "RUNZSH='no' && $(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" > /dev/null 2>&1
 	    printf "${GREEN}Done${NC}\n"
     fi
