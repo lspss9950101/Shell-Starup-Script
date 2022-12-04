@@ -171,7 +171,6 @@ alias tk="t kill-window -t"
 alias tls="t ls"
 alias tn="t new -t"
 alias gs="git status"' >> ~/.zshrc
-	printf "${GREEN}Done${NC}\n"
 }
 
 try_install_tmux() {
@@ -306,7 +305,7 @@ try_install_vim() {
 }
 
 config_vim() {
-    echo 'Installing awesome-vimrc ... '
+    echo -n 'Installing awesome-vimrc ... '
     if [ ${git_installed} = 0 ]
     then
         rm -rf ~/.vim_runtime 2> /dev/null
