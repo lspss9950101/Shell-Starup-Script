@@ -131,14 +131,14 @@ config_zsh() {
 HISTSIZE=1000
 SAVEHIST=1000
 bindkey -e' > ~/.zshrc
-	prinft "${GREEN}Done${NC}\n"
+	printf "${GREEN}Done${NC}\n"
 
 	echo -n 'Installing oh-my-zsh ... '
     if [ ${curl_installed} = 1 ]
     then
         printf "${RED}curl not installed. Skip${NC}\n"
     else
-	    sh -c "RUNZSH='no' && $(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	    sh -c "RUNZSH='no' && $(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 2>1 > /dev/null
 	    printf "${GREEN}Done${NC}\n"
     fi
 
