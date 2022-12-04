@@ -13,7 +13,7 @@ sudo_permitted=1
 
 test_git_installed() {
 	echo -n 'Checking git installation: '
-	git --version 2>1 > /dev/null
+	git --version > /dev/null 2>&1
 	if [ $? = 0 ]
 	then
 		printf "${GREEN}Installed${NC}\n"
@@ -26,7 +26,7 @@ test_git_installed() {
 
 test_curl_installed() {
 	echo -n 'Checking curl installation: '
-	curl --version 2>1 > /dev/null
+	curl --version > /dev/null 2>&1
 	if [ $? = 0 ]
 	then
 		printf "${GREEN}Installed${NC}\n"
@@ -65,7 +65,7 @@ test_tmux_installed() {
 
 test_vim_installed() {
 	echo -n 'Checking vim installation: '
-	vim --version 2>1 > /dev/null
+	vim --version > /dev/null 2>&1
 	if [ $? = 0 ]
 	then
 		printf "${GREEN}Installed${NC}\n"
@@ -78,7 +78,7 @@ test_vim_installed() {
 
 check_sudo() {
 	echo 'Checking sudo permision...'
-	sudo apt -v 2> /dev/null
+	sudo apt -v > /dev/null 2>&1
 	if [ $? = 0 ]
 	then
 		printf "Checking sudo permission: ${GREEN}Permitted${NC}\n"
@@ -138,7 +138,7 @@ bindkey -e' > ~/.zshrc
     then
         printf "${RED}curl not installed. Skip${NC}\n"
     else
-	    sh -c "RUNZSH='no' && $(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 2>1 > /dev/null
+	    sh -c "RUNZSH='no' && $(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" > /dev/null 2>&1
 	    printf "${GREEN}Done${NC}\n"
     fi
 
@@ -147,9 +147,9 @@ bindkey -e' > ~/.zshrc
     then
         printf "${RED}git not installed. Skip${NC}\n"
     else
-        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 2>1 > /dev/null
-	    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting 2>1 > /dev/null
-	    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 2>1 > /dev/null
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions > /dev/null 2>&1
+	    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting > /dev/null 2>&1
+	    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k > /dev/null 2>&1
 
 
         echo 'ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -309,8 +309,8 @@ config_vim() {
     if [ ${git_installed} = 0 ]
     then
         rm -rf ~/.vim_runtime 2> /dev/null
-	    git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime 2>1 > /dev/null
-	    sh ~/.vim_runtime/install_awesome_vimrc.sh 2>1 > /dev/null
+	    git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime > /dev/null 2>&1
+	    sh ~/.vim_runtime/install_awesome_vimrc.sh > /dev/null 2>&1
 	    printf "${GREEN}done${NC}\n"
     else
         printf "${RED}git not installed. Skip${NC}\n"
@@ -353,19 +353,19 @@ main() {
 	then
 		try_install_tmux
 	fi
-	if [ ${tmux_installed} = 0 ]
-	then
-		config_tmux
-	fi
+    if [ ${tmux_installed} = 0 ]
+    then
+       config_tmux
+    fi
     # Install vim
-	if [ ${vim_installed} = 1 ]
-	then
-		try_install_vim
-	fi
-	if [ ${vim_installed} = 0 ]
-	then
-		config_vim
-	fi
+    if [ ${vim_installed} = 1 ]
+    then
+       try_install_vim
+    fi
+    if [ ${vim_installed} = 0 ]
+    then
+       config_vim
+    fi
     printf "======== ${GREEN}Done Installing. Have fun!${NC} ========\n"
 }
 
