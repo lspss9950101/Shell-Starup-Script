@@ -147,9 +147,9 @@ bindkey -e' > ~/.zshrc
     then
         printf "${RED}git not installed. Skip${NC}\n"
     else
-        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-	    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-	    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 2>1 > /dev/null
+	    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting 2>1 > /dev/null
+	    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 2>1 > /dev/null
 
 
         echo 'ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -310,9 +310,9 @@ config_vim() {
     if [ ${git_installed} = 0 ]
     then
         rm -rf ~/.vim_runtime 2> /dev/null
-	    git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+	    git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime 2>1 > /dev/null
 	    sh ~/.vim_runtime/install_awesome_vimrc.sh 2>1 > /dev/null
-	    printf "Installing awesome-vimrc ... ${GREEN}done${NC}\n"
+	    printf "${GREEN}done${NC}\n"
     else
         printf "${RED}git not installed. Skip${NC}\n"
     fi
